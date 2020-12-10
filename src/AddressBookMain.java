@@ -44,10 +44,60 @@ public class AddressBookMain {
 		System.out.println("Zip code: "+zip);
 		System.out.println("Phone Number: "+phoneNumber);
 	}
+	public void editPerson()
+	{
+		System.out.println("Enter first name and last name of person to be edited:");
+		String firstNameCheck=sc.next();
+		String lastNameCheck=sc.next();
+		int flag=0;
+		if(firstName.equalsIgnoreCase(firstNameCheck) && lastName.equalsIgnoreCase(lastNameCheck))
+			{
+					System.out.println("1.Edit address\n2.Edit city\n3.Edit state\n4.Edit zip\n5.Edit phone number");
+					System.out.println("Enter option:");
+					int choice=sc.nextInt();
+					switch(choice)
+					{
+					case 1:
+						System.out.println("Enter new address:");
+						String addressNew=sc.next();
+						address=addressNew;
+						break;
+					case 2:
+						System.out.println("Enter new city:");
+						String cityNew=sc.next();
+						city=cityNew;
+						break;
+					case 3:
+						System.out.println("Enter new state:");
+						String stateNew=sc.next();
+						state=stateNew;
+						break;
+					case 4:
+						System.out.println("Enter new zip:");
+						int zipNew=sc.nextInt();
+						zip=zipNew;
+						break;
+					case 5:
+						System.out.println("Enter new phone number:");
+						long phoneNumberNew=sc.nextLong();
+						phoneNumber=phoneNumberNew;
+						break;
+					default:
+						System.out.println("Enter valid option");
+						break;
+					}
+					System.out.println("Edit successful");
+					flag=1;
+			}
+		if(flag==0)
+			System.out.println("No record found!");
+
+	}
 	public static void main(String[] args) {
 		System.out.println("--------------Welcome to Address Book Program--------------\n");
 		AddressBookMain obj=new AddressBookMain();
 		obj.createContact();
 		obj.displayContact();
+		obj.editPerson();
 	}
 }
