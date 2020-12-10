@@ -1,56 +1,131 @@
 import java.util.*;
-public class AddressBookMain {
-	Scanner sc=new Scanner (System.in);
-	static final String string_Constant=null;
-	static final int integer_Constant=0;
-	static final long long_Constant=0;
-	static String firstName, lastName, address, city, state;
+
+class Person
+{
+	String firstName;
+	String lastName;
+	String address;
+	String city;
+	String state;
 	int zip;
 	long phoneNumber;
-	AddressBookMain()
+
+	Person(String firstName,String lastName,String address,String city,String state,int zip,long phoneNumber)
 	{
-		firstName=string_Constant;
-		lastName =string_Constant;
-		address=string_Constant;
-		city=string_Constant;
-		state=string_Constant;
-		zip=integer_Constant;
-		phoneNumber=long_Constant;
+		this.firstName=firstName;
+		this.lastName=lastName;	
+		this.address=address;
+		this.city=city;
+		this.state=state;
+		this.zip=zip;
+		this.phoneNumber=phoneNumber;
 	}
-	public void createContact()
+
+	public String getPersonFirstName()
+	{
+		return this.firstName;
+	}
+
+	public String getPersonLastName() 
+	{
+		return this.lastName;
+	}
+
+	public int getZIP()
+	{
+		return this.zip;
+	}
+
+	public static Comparator<Person> personLastNameComparator = new Comparator<Person>() {
+
+		public int compare(Person p1, Person p2) {
+		   String personLastName1 = p1.getPersonLastName().toUpperCase();
+		   String personLastName2 = p2.getPersonLastName().toUpperCase();  
+		   int result=personLastName1.compareTo(personLastName2);
+		   if(result!=0)
+		   {
+			   return result;
+		   }
+		   else
+		   {
+			   String personFirstName1 = p1.getPersonFirstName().toUpperCase();
+			   String personFirstName2 = p2.getPersonFirstName().toUpperCase();
+			   return personFirstName1.compareTo(personFirstName2);
+		   }
+	}};
+
+	public static Comparator<Person> personZIPComparator = new Comparator<Person>() {
+
+		public int compare(Person p1, Person p2) {
+
+		   int zip1 = p1.getZIP();
+		   int zip2 = p2.getZIP();
+		   int result=zip1-zip2;
+		   if(result!=0)
+			   return result;
+		   else
+		   {
+			   String personFirstName1 = p1.getPersonFirstName().toUpperCase();
+			   String personFirstName2 = p2.getPersonFirstName().toUpperCase();
+			   return personFirstName1.compareTo(personFirstName2);
+		   }
+
+	}};
+
+}
+
+public class AddressBookMain {
+	static ArrayList<Person> addressBook=new ArrayList<Person>();
+	static Scanner sc=new Scanner (System.in);
+	public static void createContact()
 	{	
 		System.out.println("Enter your first name:");
-		firstName=sc.next();
+		String firstName=sc.next();
 		System.out.println("Enter your last name:");
-		lastName=sc.next();
+		String lastName=sc.next();
 		System.out.println("Enter your email address:");
-		address=sc.next();
+		String address=sc.next();
 		System.out.println("Enter your city name:");
-		city=sc.next();
+		String city=sc.next();
 		System.out.println("Enter your state name:");
-		state=sc.next();
+		String state=sc.next();
 		System.out.println("Enter your zip code:");
-		zip=sc.nextInt();
+		int zip=sc.nextInt();
 		System.out.println("Enter your phone number:");
-		phoneNumber=sc.nextLong();
+		long phoneNumber=sc.nextLong();
+		Person p=new Person(firstName,lastName,address,city,state,zip,phoneNumber);
+		addressBook.add(p);
 	}
-	public void displayContact()
+	public static void displayContact()
 	{
-		System.out.println("First name: "+firstName);
-		System.out.println("Last name: "+lastName);
-		System.out.println("Email address: "+address);
-		System.out.println("City name: "+city);
-		System.out.println("State name: "+state);
-		System.out.println("Zip code: "+zip);
-		System.out.println("Phone Number: "+phoneNumber);
+		if(addressBook.size()==0)
+		{
+			System.out.println("No records in address book!");
+			System.out.println("-----------------------");
+		}
+		else
+		{
+			System.out.println("Printing address book....");
+			System.out.println(" First Name        Last Name        Address        State        City         ZIP Code         Phone Number");
+			System.out.println("---------------------------------------------------------------------------------------");
+			for(int i=0;i<addressBook.size();i++)
+			{
+				Person person=addressBook.get(i);
+				System.out.println(" "+person.firstName+"       "+person.lastName+"       "+person.address+"       "+person.state+"       "+person.city+"       "+person.zip+"       "+person.phoneNumber);
+				System.out.println(" ");
+			}
+			System.out.println("--------------------------------------------------------------------------------------------");
 	}
-	public void editContact()
+	}
+	public static void editContact()
 	{
 		System.out.println("Enter first name and last name of person to be edited:");
-		String firstNameCheck=sc.next();
-		String lastNameCheck=sc.next();
+		String firstName=sc.next();
+		String lastName=sc.next();
 		int flag=0;
-		if(firstName.equalsIgnoreCase(firstNameCheck) && lastName.equalsIgnoreCase(lastNameCheck))
+		for(int i=0;i<addressBook.size();i++) {
+			Person person=addressBook.get(i);
+		if(firstName.equalsIgnoreCase(person.firstName) && lastName.equalsIgnoreCase(person.lastName))
 			{
 					System.out.println("1.Edit address\n2.Edit city\n3.Edit state\n4.Edit zip\n5.Edit phone number");
 					System.out.println("Enter option:");
@@ -59,28 +134,28 @@ public class AddressBookMain {
 					{
 					case 1:
 						System.out.println("Enter new address:");
-						String addressNew=sc.next();
-						address=addressNew;
+						String address=sc.next();
+						person.address=address;
 						break;
 					case 2:
 						System.out.println("Enter new city:");
-						String cityNew=sc.next();
-						city=cityNew;
+						String city=sc.next();
+						person.city=city;
 						break;
 					case 3:
 						System.out.println("Enter new state:");
-						String stateNew=sc.next();
-						state=stateNew;
+						String state=sc.next();
+						person.state=state;
 						break;
 					case 4:
 						System.out.println("Enter new zip:");
-						int zipNew=sc.nextInt();
-						zip=zipNew;
+						int zip=sc.nextInt();
+						person.zip=zip;
 						break;
 					case 5:
 						System.out.println("Enter new phone number:");
-						long phoneNumberNew=sc.nextLong();
-						phoneNumber=phoneNumberNew;
+						long phoneNumber=sc.nextLong();
+						person.phoneNumber=phoneNumber;
 						break;
 					default:
 						System.out.println("Enter valid option");
@@ -88,21 +163,29 @@ public class AddressBookMain {
 					}
 					System.out.println("Edit successful");
 					flag=1;
+					break;
 			}
+		}
 		if(flag==0)
 			System.out.println("No record found!");
 	}
-	public void deleteContact()
+	public static void deleteContact()
 	{
-		System.out.println("Enter details of the person to be deleted");
+		System.out.println("Enter details of person to be deleted");
 		System.out.println("Enter first name:");
-		String firstNameCheck=sc.next();
+		String firstName=sc.next();
 		System.out.println("Enter last name:");
 		String lastName=sc.next();
-		int flag=0;		
-		if(firstName.equalsIgnoreCase(firstNameCheck) && lastName.equalsIgnoreCase(lastName)) {
-			flag=1;
+		int flag=0;
+		for(int i=0;i<addressBook.size();i++)
+		{
+			Person person=addressBook.get(i);
+			if(firstName.equals(person.firstName) && lastName.equals(person.lastName)) {
+				flag=1;
+				addressBook.remove(person);
+				break;
 			}
+		}
 		if(flag==0)
 			System.out.println("No record found!");
 		else
@@ -110,10 +193,34 @@ public class AddressBookMain {
 	}
 	public static void main(String[] args) {
 		System.out.println("--------------Welcome to Address Book Program--------------\n");
-		AddressBookMain obj=new AddressBookMain();
-		obj.createContact();
-		obj.displayContact();
-		obj.editContact();
-		obj.deleteContact();
+		int choice=0;
+		do
+		{
+		System.out.println("1.Add a person\n2.Edit a person\n3.Delete a person\n4.Print Address book\n");
+		System.out.println("Select an option from above options:");
+		choice=sc.nextInt();
+		switch(choice)
+		{
+		case 1:
+			createContact();
+			break;
+		case 2:
+			editContact();
+			break;
+		case 3:
+			deleteContact();
+			break;
+		case 4:
+			displayContact();
+			break;
+		case 5:
+			System.out.println("Exiting address book....");
+			break;
+		default:
+			System.out.println("Enter correct option:");
+			break;
+		}
+		System.out.println("-------------------");
+		}while(choice!=5);
 	}
 }
