@@ -44,7 +44,7 @@ public class AddressBookMain {
 		System.out.println("Zip code: "+zip);
 		System.out.println("Phone Number: "+phoneNumber);
 	}
-	public void editPerson()
+	public void editContact()
 	{
 		System.out.println("Enter first name and last name of person to be edited:");
 		String firstNameCheck=sc.next();
@@ -91,13 +91,29 @@ public class AddressBookMain {
 			}
 		if(flag==0)
 			System.out.println("No record found!");
-
+	}
+	public void deleteContact()
+	{
+		System.out.println("Enter details of the person to be deleted");
+		System.out.println("Enter first name:");
+		String firstNameCheck=sc.next();
+		System.out.println("Enter last name:");
+		String lastName=sc.next();
+		int flag=0;		
+		if(firstName.equalsIgnoreCase(firstNameCheck) && lastName.equalsIgnoreCase(lastName)) {
+			flag=1;
+			}
+		if(flag==0)
+			System.out.println("No record found!");
+		else
+			System.out.println("Deletion successful!");
 	}
 	public static void main(String[] args) {
 		System.out.println("--------------Welcome to Address Book Program--------------\n");
 		AddressBookMain obj=new AddressBookMain();
 		obj.createContact();
 		obj.displayContact();
-		obj.editPerson();
+		obj.editContact();
+		obj.deleteContact();
 	}
 }
