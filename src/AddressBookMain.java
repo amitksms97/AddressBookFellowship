@@ -1,10 +1,10 @@
 import java.util.*;
 public class AddressBookMain {
 	Scanner sc=new Scanner (System.in);
-	final String string_Constant=null;
-	final int integer_Constant=0;
-	final long long_Constant=0;
-	String firstName, lastName, address, city, state;
+	static final String string_Constant=null;
+	static final int integer_Constant=0;
+	static final long long_Constant=0;
+	static String firstName, lastName, address, city, state;
 	int zip;
 	long phoneNumber;
 	AddressBookMain()
