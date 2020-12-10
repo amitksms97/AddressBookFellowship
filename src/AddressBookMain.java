@@ -45,7 +45,7 @@ public class AddressBookMain {
 		System.out.println("Phone Number: "+phoneNumber);
 	}
 	public static void main(String[] args) {
-		System.out.println("Welcome to Address Book Program");
+		System.out.println("--------------Welcome to Address Book Program--------------\n");
 		AddressBookMain obj=new AddressBookMain();
 		obj.createContact();
 		obj.displayContact();
