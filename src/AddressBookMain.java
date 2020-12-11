@@ -289,6 +289,51 @@ public class AddressBookMain {
 		System.out.println("Sorting by last name successful!");
 	}
 	
+	public static void searchPerson()
+	{
+		System.out.println("1.View person by name\n2.View person by city\n3.View person by state");
+		int choice=sc.nextInt();
+		int flag=0;
+		String check=null;
+		System.out.println("Enter details of person to be searched");
+		switch(choice)
+		{
+		case 1:
+			System.out.println("Enter first name:");
+			check=sc.next();
+			flag=1;
+			break;
+		case 2:
+			System.out.println("Enter city name:");
+			check=sc.next();
+			flag=1;
+			break;
+		case 3:
+			System.out.println("Enter state name:");
+			check=sc.next();
+			flag=1;
+		default:
+			System.out.println("Invalid Input");
+		}
+		for(int i=0;i<addressBook.size();i++)
+		{
+			Person person=addressBook.get(i);
+			if(check.equalsIgnoreCase(person.firstName) || check.equalsIgnoreCase(person.city) || check.equalsIgnoreCase(person.state)) {
+				flag=1;
+				System.out.println("First name:"+person.firstName);
+				System.out.println("Last name:"+person.lastName);
+				System.out.println("Address:"+person.address);
+				System.out.println("City:"+person.city);
+				System.out.println("State:"+person.state);
+				System.out.println("Zip:"+person.zip);
+				System.out.println("Phone number:"+person.phoneNumber);
+				System.out.println("------------");
+			}
+		}
+		if(flag==0)
+			System.out.println("No record found!");
+	}
+
 	public static void main(String[] args) {
 		System.out.println("--------------Welcome to Address Book Program--------------\n");
 		addPerson();
@@ -309,7 +354,7 @@ public class AddressBookMain {
 			deleteContact();
 			break;
 		case 4:
-			/*searchPerson();*/
+			searchPerson();
 			break;
 		case 5:
 			displayContact();
