@@ -309,7 +309,7 @@ public class AddressBookMain {
 			deleteContact();
 			break;
 		case 4:
-			//searchPerson();
+			/*searchPerson();*/
 			break;
 		case 5:
 			displayContact();
