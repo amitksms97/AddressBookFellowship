@@ -36,11 +36,11 @@ class Person
 		return this.zip;
 	}
 
-	public static Comparator<Person> personLastNameComparator = new Comparator<Person>() {
+	public static Comparator<Person> personFirstNameComparator = new Comparator<Person>() {
 
 		public int compare(Person p1, Person p2) {
-		   String personLastName1 = p1.getPersonLastName().toUpperCase();
-		   String personLastName2 = p2.getPersonLastName().toUpperCase();  
+		   String personLastName1 = p1.getPersonFirstName().toUpperCase();
+		   String personLastName2 = p2.getPersonFirstName().toUpperCase();  
 		   int result=personLastName1.compareTo(personLastName2);
 		   if(result!=0)
 		   {
@@ -48,12 +48,12 @@ class Person
 		   }
 		   else
 		   {
-			   String personFirstName1 = p1.getPersonFirstName().toUpperCase();
-			   String personFirstName2 = p2.getPersonFirstName().toUpperCase();
+			   String personFirstName1 = p1.getPersonLastName().toUpperCase();
+			   String personFirstName2 = p2.getPersonLastName().toUpperCase();
 			   return personFirstName1.compareTo(personFirstName2);
 		   }
 	}};
-
+	
 	public static Comparator<Person> personZIPComparator = new Comparator<Person>() {
 
 		public int compare(Person p1, Person p2) {
@@ -71,7 +71,6 @@ class Person
 		   }
 
 	}};
-
 }
 
 public class AddressBookMain {
@@ -143,6 +142,7 @@ public class AddressBookMain {
 			System.out.println("--------------------------------------------------------------------------------------------");
 	}
 	}
+	
 	public static void editContact()
 	{
 		System.out.println("Enter first name and last name of person to be edited:");
@@ -218,11 +218,17 @@ public class AddressBookMain {
 			System.out.println("Deletion successful!");
 	}
 	
+	public static void sortByFirstName()
+	{
+		Collections.sort(addressBook,Person.personFirstNameComparator);
+		System.out.println("Sorting by last name successful!");
+	}
+	
 	public static void main(String[] args) {
 		System.out.println("--------------Welcome to Address Book Program--------------\n");
+		addPerson();
 		do
 		{
-		addPerson();
 		System.out.println("1.Add a person\n2.Edit a person\n3.Delete a person\n4.Search a person\n5.Print Address book\n6.Sort Address book by last name\n7.Sort Address book by ZIP\n8.Exit address book");
 		System.out.println("Select an option from above options:");
 		choice=sc.nextInt();
@@ -242,6 +248,9 @@ public class AddressBookMain {
 			break;
 		case 5:
 			displayContact();
+			break;
+		case 6:
+			sortByFirstName();
 			break;
 		case 8:
 			System.out.println("Exiting address book....");
