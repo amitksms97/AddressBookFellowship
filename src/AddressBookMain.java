@@ -104,10 +104,6 @@ class Person
 
 		public int compare(Person p1, Person p2) {
 
-=======
-
-		public int compare(Person p1, Person p2) {
-
 			   String personCity1 = p1.getCity().toUpperCase();
 			   String personCity2 = p2.getCity().toUpperCase();  
 			   int result=personCity1.compareTo(personCity2);
@@ -402,7 +398,6 @@ public class AddressBookMain {
 			break;
 		}
 		System.out.println("*****************************");
-		System.out.println("-------------------");
 		}while(choice!=10);
 	}
 }
