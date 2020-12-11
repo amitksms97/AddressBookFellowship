@@ -31,6 +31,16 @@ class Person
 		return this.lastName;
 	}
 
+	public String getCity()
+	{
+		return this.city;
+	}
+	
+	public String getState()
+	{
+		return this.state;
+	}
+	
 	public int getZIP()
 	{
 		return this.zip;
@@ -69,7 +79,44 @@ class Person
 			   String personFirstName2 = p2.getPersonFirstName().toUpperCase();
 			   return personFirstName1.compareTo(personFirstName2);
 		   }
+	}};
+	
+	public static Comparator<Person> personCityComparator = new Comparator<Person>() {
 
+		public int compare(Person p1, Person p2) {
+
+			   String personCity1 = p1.getCity().toUpperCase();
+			   String personCity2 = p2.getCity().toUpperCase();  
+			   int result=personCity1.compareTo(personCity2);
+			   if(result!=0)
+			   {
+				   return result;
+			   }
+			   else
+			   {
+				   String personFirstName1 = p1.getPersonFirstName().toUpperCase();
+				   String personFirstName2 = p2.getPersonFirstName().toUpperCase();
+				   return personFirstName1.compareTo(personFirstName2);
+			   }
+	}};
+	
+	public static Comparator<Person> personStateComparator = new Comparator<Person>() {
+
+		public int compare(Person p1, Person p2) {
+
+			   String personState1 = p1.getState().toUpperCase();
+			   String personState2 = p2.getState().toUpperCase();  
+			   int result=personState1.compareTo(personState2);
+			   if(result!=0)
+			   {
+				   return result;
+			   }
+			   else
+			   {
+				   String personFirstName1 = p1.getPersonFirstName().toUpperCase();
+				   String personFirstName2 = p2.getPersonFirstName().toUpperCase();
+				   return personFirstName1.compareTo(personFirstName2);
+			   }
 	}};
 }
 
@@ -224,12 +271,75 @@ public class AddressBookMain {
 		System.out.println("Sorting by last name successful!");
 	}
 	
+	public static void sortByCity()
+	{
+		Collections.sort(addressBook,Person.personCityComparator);
+		System.out.println("Sorting by last name successful!");
+	}
+	
+	public static void sortByState()
+	{
+		Collections.sort(addressBook,Person.personStateComparator);
+		System.out.println("Sorting by last name successful!");
+	}
+	
+	public static void sortByZip()
+	{
+		Collections.sort(addressBook,Person.personZIPComparator);
+		System.out.println("Sorting by last name successful!");
+	}
+	
+	public static void searchPerson()
+	{
+		System.out.println("1.View person by name\n2.View person by city\n3.View person by state");
+		int choice=sc.nextInt();
+		int flag=0;
+		String check=null;
+		System.out.println("Enter details of person to be searched");
+		switch(choice)
+		{
+		case 1:
+			System.out.println("Enter first name:");
+			check=sc.next();
+			flag=1;
+			break;
+		case 2:
+			System.out.println("Enter city name:");
+			check=sc.next();
+			flag=1;
+			break;
+		case 3:
+			System.out.println("Enter state name:");
+			check=sc.next();
+			flag=1;
+		default:
+			System.out.println("Invalid Input");
+		}
+		for(int i=0;i<addressBook.size();i++)
+		{
+			Person person=addressBook.get(i);
+			if(check.equalsIgnoreCase(person.firstName) || check.equalsIgnoreCase(person.city) || check.equalsIgnoreCase(person.state)) {
+				flag=1;
+				System.out.println("First name:"+person.firstName);
+				System.out.println("Last name:"+person.lastName);
+				System.out.println("Address:"+person.address);
+				System.out.println("City:"+person.city);
+				System.out.println("State:"+person.state);
+				System.out.println("Zip:"+person.zip);
+				System.out.println("Phone number:"+person.phoneNumber);
+				System.out.println("------------");
+			}
+		}
+		if(flag==0)
+			System.out.println("No record found!");
+	}
+	
 	public static void main(String[] args) {
 		System.out.println("--------------Welcome to Address Book Program--------------\n");
 		addPerson();
 		do
 		{
-		System.out.println("1.Add a person\n2.Edit a person\n3.Delete a person\n4.Search a person\n5.Print Address book\n6.Sort Address book by last name\n7.Sort Address book by ZIP\n8.Exit address book");
+		System.out.println("1.Add a person\n2.Edit a person\n3.Delete a person\n4.Search a person\n5.Print Address book\n6.Sort Address book by first name\n7.Sort Address book by ZIP\n8.Sort Address book by City\n9.Sort Address book by State\n10.Exit address book");
 		System.out.println("Select an option from above options:");
 		choice=sc.nextInt();
 		switch(choice)
@@ -244,7 +354,7 @@ public class AddressBookMain {
 			deleteContact();
 			break;
 		case 4:
-			//searchPerson();
+			searchPerson();
 			break;
 		case 5:
 			displayContact();
@@ -252,7 +362,16 @@ public class AddressBookMain {
 		case 6:
 			sortByFirstName();
 			break;
+		case 7:
+			sortByZip();
+			break;
 		case 8:
+			sortByCity();
+			break;
+		case 9:
+			sortByState();
+			break;
+		case 10:
 			System.out.println("Exiting address book....");
 			break;
 		default:
@@ -260,6 +379,6 @@ public class AddressBookMain {
 			break;
 		}
 		System.out.println("-------------------");
-		}while(choice!=8);
+		}while(choice!=10);
 	}
 }
