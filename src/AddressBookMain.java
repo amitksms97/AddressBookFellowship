@@ -378,7 +378,7 @@ public class AddressBookMain {
 			System.out.println("Enter correct option:");
 			break;
 		}
-		System.out.println("-------------------");
+		System.out.println("*****************************");
 		}while(choice!=10);
 	}
 }
