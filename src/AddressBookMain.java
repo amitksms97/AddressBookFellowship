@@ -289,7 +289,6 @@ public class AddressBookMain {
 		System.out.println("Sorting by last name successful!");
 	}
 	
-	
 	public static void main(String[] args) {
 		System.out.println("--------------Welcome to Address Book Program--------------\n");
 		addPerson();
