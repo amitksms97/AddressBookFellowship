@@ -151,7 +151,6 @@ public class AddressBookMain {
 				duplicate=true;
 			}
 		}
-		
 		if(duplicate==false) {
 		System.out.println("Enter your city name:");
 		String city=sc.next();
@@ -253,7 +252,7 @@ public class AddressBookMain {
 		for(int i=0;i<addressBook.size();i++)
 		{
 			Person person=addressBook.get(i);
-			if(firstName.equals(person.firstName) && lastName.equals(person.lastName)) {
+			if(firstName.equalsIgnoreCase(person.firstName) && lastName.equalsIgnoreCase(person.lastName)) {
 				flag=1;
 				addressBook.remove(person);
 				break;
@@ -301,17 +300,14 @@ public class AddressBookMain {
 		case 1:
 			System.out.println("Enter first name:");
 			check=sc.next();
-			flag=1;
 			break;
 		case 2:
 			System.out.println("Enter city name:");
 			check=sc.next();
-			flag=1;
 			break;
 		case 3:
 			System.out.println("Enter state name:");
 			check=sc.next();
-			flag=1;
 		default:
 			System.out.println("Invalid Input");
 		}
@@ -375,10 +371,10 @@ public class AddressBookMain {
 			System.out.println("Exiting address book....");
 			break;
 		default:
-			System.out.println("Enter correct option:");
+			System.out.println("Invalid option selected. Enter correct option:");
 			break;
 		}
-		System.out.println("*****************************");
+		System.out.println("-------------------");
 		}while(choice!=10);
 	}
 }
