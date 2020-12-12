@@ -48,9 +48,9 @@ class Person
 
 	public static Comparator<Person> personFirstNameComparator = new Comparator<Person>() {
 
-		public int compare(Person p1, Person p2) {
-		   String personLastName1 = p1.getPersonFirstName().toUpperCase();
-		   String personLastName2 = p2.getPersonFirstName().toUpperCase();  
+		public int compare(Person person1, Person person2) {
+		   String personLastName1 = person1.getPersonFirstName().toUpperCase();
+		   String personLastName2 = person2.getPersonFirstName().toUpperCase();  
 		   int result=personLastName1.compareTo(personLastName2);
 		   if(result!=0)
 		   {
@@ -58,35 +58,35 @@ class Person
 		   }
 		   else
 		   {
-			   String personFirstName1 = p1.getPersonLastName().toUpperCase();
-			   String personFirstName2 = p2.getPersonLastName().toUpperCase();
+			   String personFirstName1 = person1.getPersonLastName().toUpperCase();
+			   String personFirstName2 = person2.getPersonLastName().toUpperCase();
 			   return personFirstName1.compareTo(personFirstName2);
 		   }
 	}};
 	
 	public static Comparator<Person> personZIPComparator = new Comparator<Person>() {
 
-		public int compare(Person p1, Person p2) {
+		public int compare(Person person1, Person person2) {
 
-		   int zip1 = p1.getZIP();
-		   int zip2 = p2.getZIP();
+		   int zip1 = person1.getZIP();
+		   int zip2 = person2.getZIP();
 		   int result=zip1-zip2;
 		   if(result!=0)
 			   return result;
 		   else
 		   {
-			   String personFirstName1 = p1.getPersonFirstName().toUpperCase();
-			   String personFirstName2 = p2.getPersonFirstName().toUpperCase();
+			   String personFirstName1 = person1.getPersonFirstName().toUpperCase();
+			   String personFirstName2 = person2.getPersonFirstName().toUpperCase();
 			   return personFirstName1.compareTo(personFirstName2);
 		   }
 	}};
 	
 	public static Comparator<Person> personCityComparator = new Comparator<Person>() {
 
-		public int compare(Person p1, Person p2) {
+		public int compare(Person person1, Person person2) {
 
-			   String personCity1 = p1.getCity().toUpperCase();
-			   String personCity2 = p2.getCity().toUpperCase();  
+			   String personCity1 = person1.getCity().toUpperCase();
+			   String personCity2 = person2.getCity().toUpperCase();  
 			   int result=personCity1.compareTo(personCity2);
 			   if(result!=0)
 			   {
@@ -94,16 +94,16 @@ class Person
 			   }
 			   else
 			   {
-				   String personFirstName1 = p1.getPersonFirstName().toUpperCase();
-				   String personFirstName2 = p2.getPersonFirstName().toUpperCase();
+				   String personFirstName1 = person1.getPersonFirstName().toUpperCase();
+				   String personFirstName2 = person2.getPersonFirstName().toUpperCase();
 				   return personFirstName1.compareTo(personFirstName2);
 			   }
 	}};
 	
 	public static Comparator<Person> personStateComparator = new Comparator<Person>() {
 
-		public int compare(Person p1, Person p2) {
-
+		public int compare(Person person1, Person person2) {
+      
 			   String personCity1 = p1.getCity().toUpperCase();
 			   String personCity2 = p2.getCity().toUpperCase();  
 			   int result=personCity1.compareTo(personCity2);
@@ -132,8 +132,8 @@ class Person
 			   }
 			   else
 			   {
-				   String personFirstName1 = p1.getPersonFirstName().toUpperCase();
-				   String personFirstName2 = p2.getPersonFirstName().toUpperCase();
+				   String personFirstName1 = person1.getPersonFirstName().toUpperCase();
+				   String personFirstName2 = person2.getPersonFirstName().toUpperCase();
 				   return personFirstName1.compareTo(personFirstName2);
 			   }
 	}};
@@ -141,7 +141,7 @@ class Person
 
 public class AddressBookMain {
 	static ArrayList<Person> addressBook=new ArrayList<Person>();
-	static Scanner sc=new Scanner (System.in);
+	static Scanner scanner=new Scanner (System.in);
 	static int choice=0;
 	
 	public static void addPerson() {
@@ -158,11 +158,11 @@ public class AddressBookMain {
 	{	
 		boolean duplicate=false;
 		System.out.println("Enter your first name:");
-		String firstName=sc.next();
+		String firstName=scanner.next();
 		System.out.println("Enter your last name:");
-		String lastName=sc.next();
+		String lastName=scanner.next();
 		System.out.println("Enter your email address:");
-		String address=sc.next();
+		String address=scanner.next();
 		for(int i=0;i<addressBook.size();i++) {
 			Person person=addressBook.get(i);
 			if(firstName.equalsIgnoreCase(person.firstName) && lastName.equalsIgnoreCase(person.lastName) && address.equalsIgnoreCase(person.address))
@@ -172,13 +172,13 @@ public class AddressBookMain {
 		}
 		if(duplicate==false) {
 		System.out.println("Enter your city name:");
-		String city=sc.next();
+		String city=scanner.next();
 		System.out.println("Enter your state name:");
-		String state=sc.next();
+		String state=scanner.next();
 		System.out.println("Enter your zip code:");
-		int zip=sc.nextInt();
+		int zip=scanner.nextInt();
 		System.out.println("Enter your phone number:");
-		String phoneNumber=sc.next();
+		String phoneNumber=scanner.next();
 		Person p=new Person(firstName,lastName,address,city,state,zip,phoneNumber);
 		addressBook.add(p);
 		}
@@ -211,8 +211,8 @@ public class AddressBookMain {
 	public static void editContact()
 	{
 		System.out.println("Enter first name and last name of person to be edited:");
-		String firstName=sc.next();
-		String lastName=sc.next();
+		String firstName=scanner.next();
+		String lastName=scanner.next();
 		int flag=0;
 		for(int i=0;i<addressBook.size();i++) {
 			Person person=addressBook.get(i);
@@ -220,32 +220,32 @@ public class AddressBookMain {
 			{
 					System.out.println("1.Edit address\n2.Edit city\n3.Edit state\n4.Edit zip\n5.Edit phone number");
 					System.out.println("Enter option:");
-					int choice=sc.nextInt();
+					int choice=scanner.nextInt();
 					switch(choice)
 					{
 					case 1:
 						System.out.println("Enter new address:");
-						String address=sc.next();
+						String address=scanner.next();
 						person.address=address;
 						break;
 					case 2:
 						System.out.println("Enter new city:");
-						String city=sc.next();
+						String city=scanner.next();
 						person.city=city;
 						break;
 					case 3:
 						System.out.println("Enter new state:");
-						String state=sc.next();
+						String state=scanner.next();
 						person.state=state;
 						break;
 					case 4:
 						System.out.println("Enter new zip:");
-						int zip=sc.nextInt();
+						int zip=scanner.nextInt();
 						person.zip=zip;
 						break;
 					case 5:
 						System.out.println("Enter new phone number:");
-						String phoneNumber=sc.next();
+						String phoneNumber=scanner.next();
 						person.phoneNumber=phoneNumber;
 						break;
 					default:
@@ -264,9 +264,9 @@ public class AddressBookMain {
 	{
 		System.out.println("Enter details of person to be deleted");
 		System.out.println("Enter first name:");
-		String firstName=sc.next();
+		String firstName=scanner.next();
 		System.out.println("Enter last name:");
-		String lastName=sc.next();
+		String lastName=scanner.next();
 		int flag=0;
 		for(int i=0;i<addressBook.size();i++)
 		{
@@ -310,7 +310,7 @@ public class AddressBookMain {
 	public static void searchPerson()
 	{
 		System.out.println("1.View person by name\n2.View person by city\n3.View person by state");
-		int choice=sc.nextInt();
+		int choice=scanner.nextInt();
 		int flag=0;
 		String check=null;
 		System.out.println("Enter details of person to be searched");
@@ -318,15 +318,15 @@ public class AddressBookMain {
 		{
 		case 1:
 			System.out.println("Enter first name:");
-			check=sc.next();
+			check=scanner.next();
 			break;
 		case 2:
 			System.out.println("Enter city name:");
-			check=sc.next();
+			check=scanner.next();
 			break;
 		case 3:
 			System.out.println("Enter state name:");
-			check=sc.next();
+			check=scanner.next();
 		default:
 			System.out.println("Invalid Input");
 		}
@@ -356,7 +356,7 @@ public class AddressBookMain {
 		{
 		System.out.println("1.Add a person\n2.Edit a person\n3.Delete a person\n4.Search a person\n5.Print Address book\n6.Sort Address book by first name\n7.Sort Address book by ZIP\n8.Sort Address book by City\n9.Sort Address book by State\n10.Exit address book");
 		System.out.println("Select an option from above options:");
-		choice=sc.nextInt();
+		choice=scanner.nextInt();
 		switch(choice)
 		{
 		case 1:
