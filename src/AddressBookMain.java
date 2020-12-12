@@ -103,9 +103,28 @@ class Person
 	public static Comparator<Person> personStateComparator = new Comparator<Person>() {
 
 		public int compare(Person person1, Person person2) {
+      
+			   String personCity1 = p1.getCity().toUpperCase();
+			   String personCity2 = p2.getCity().toUpperCase();  
+			   int result=personCity1.compareTo(personCity2);
+			   if(result!=0)
+			   {
+				   return result;
+			   }
+			   else
+			   {
+				   String personFirstName1 = p1.getPersonFirstName().toUpperCase();
+				   String personFirstName2 = p2.getPersonFirstName().toUpperCase();
+				   return personFirstName1.compareTo(personFirstName2);
+			   }
+	}};
+	
+	public static Comparator<Person> personStateComparator = new Comparator<Person>() {
 
-			   String personState1 = person1.getState().toUpperCase();
-			   String personState2 = person2.getState().toUpperCase();  
+		public int compare(Person p1, Person p2) {
+
+			   String personState1 = p1.getState().toUpperCase();
+			   String personState2 = p2.getState().toUpperCase();  
 			   int result=personState1.compareTo(personState2);
 			   if(result!=0)
 			   {
